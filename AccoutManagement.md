@@ -14,3 +14,27 @@
 ### /etc/group
 >群組名稱:群組密碼:GID:此群組支援的帳號名稱<br>
 >如果我想要讓 dmtsai 與 alex 也加入 root 這個群組，那麼在第一行的最後面加上『dmtsai,alex』，注意不要有空格。
+
+### /etc/gshadow
+>群組名稱:密碼欄:群組管理員的帳號:有加入該群組支援的所屬帳號
+
+### useradd
+>-u UID<br>
+>-g initial group (該群組的GID會放到/etc/passwd第四個欄位)<br>
+>-M 不要建立使用者家目錄(系統帳號預設值)<br>
+>-m 要建立使用者家目錄(一般帳號預設值)<br>
+>-d 指定某個目錄成為家目錄，而不要使用預設值。(絕對路徑)<br>
+>-r 建立一個系統的帳號(不會主動建立家目錄)，這個帳號的 UID 會有限制(參考 /etc/login.defs)<br>
+>-s 後面接一個 shell，若沒有指定則預設是/bin/bash<br>
+>-e 帳號失效日<br>
+>-f 指定密碼是否會失效。0為立刻失效，-1為永遠不失效
+
+>**useradd 參考檔**
+>>useradd -D<br>
+>>GROUP=100 預設的群組<br>
+>>HOME=/home 預設的家目錄所在目錄<br>
+>>INACTIVE=-1 密碼失效日，在 shadow 內的第 7 欄<br>
+>>EXPIRE=	帳號失效日，在 shadow 內的第 8 欄<br>
+>>SHELL=/bin/bash	預設的 shell<br>
+>>SKEL=/etc/skel 使用者家目錄的內容資料參考目錄<br>
+>>CREATE_MAIL_SPOOL=yes 是否主動幫使用者建立郵件信箱(mailbox)
