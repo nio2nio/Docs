@@ -57,6 +57,25 @@
 >-W 密碼過期前警告日期
 
 >**使用者在第一次登入時， 強制她們一定要更改密碼後才能夠使用系統資源**
->> useradd demouser
->> echo "demopass" | passwd --stdin demouser
+>> useradd demouser<br>
+>> echo "demopass" | passwd --stdin demouser<br>
 >> chage -d 0 demouser
+
+### usermod
+>-c 帳號的說明<br>
+>-d 家目錄<br>
+>-e 帳號失效日期<br>
+>-f 密碼失效日期<br>
+>-g 初始群組<br>
+>-G 次要群組<br>
+>-l 修改帳號名稱<br>
+>-s Shell<br>
+>-u UID<br>
+>-L Lock<br>
+>-U Unlock
+
+### userdel
+>-r 連同家目錄也刪除
+
+### id
+>查詢某人或自己的相關 UID/GID 等等的資訊
