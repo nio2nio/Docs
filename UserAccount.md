@@ -11,13 +11,6 @@
 > **Q: shadow 是使用哪種加密的機制**
 >> authconfig --test | grep hashing
 
-### /etc/group
->群組名稱:群組密碼:GID:此群組支援的帳號名稱<br>
->如果我想要讓 dmtsai 與 alex 也加入 root 這個群組，那麼在第一行的最後面加上『dmtsai,alex』，注意不要有空格
-
-### /etc/gshadow
->群組名稱:密碼欄:群組管理員的帳號:有加入該群組支援的所屬帳號
-
 ### useradd
 >-u UID<br>
 >-g initial group (該群組的GID會放到/etc/passwd第四個欄位)<br>
