@@ -65,3 +65,5 @@ $conf['extra_login_security'] = true;
 $ sudo systemctl start postgresql-9.6.service
 $ sudo systemctl reload httpd.service
 ```
+### Visit phpPgAdmin from browser
+**http://YourServerIP/phpPgAdmin/**
