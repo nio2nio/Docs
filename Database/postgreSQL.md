@@ -10,10 +10,10 @@ $ sudo yum install php php-pgsql
 [Repository](https://yum.postgresql.org/repopackages.php)
 ```shell
 $ sudo yum install https://download.postgresql.org/pub/repos/yum/9.6/redhat/rhel-7-x86_64/pgdg-centos96-9.6-3.noarch.rpm
-$ sudo yum groupinstall "PostgreSQL Database Server 9.5 PGDG"
+$ sudo yum groupinstall "PostgreSQL Database Server 9.6 PGDG"
 
 # Initiate the database
-$ sudo /usr/pgsql-9.6/bin/postgresql95-setup initdb
+$ sudo /usr/pgsql-9.6/bin/postgresql96-setup initdb
 
 # Setup database user authentication method
 $ sudo vi /var/lib/pgsql/9.6/data/pg_hba.conf
@@ -29,8 +29,8 @@ listen_addresses = '*'
 port = 5432
 
 $ Start PostgreSQL service
-$ sudo systemctl start postgresql-9.5.service
-$ sudo systemctl enable postgresql-9.5.service
+$ sudo systemctl start postgresql-9.6.service
+$ sudo systemctl enable postgresql-9.6.service
 ```
 
 ### Setup database credentials
@@ -59,9 +59,9 @@ $conf['servers'][0]['host'] = 'localhost';
 $conf['owned_only'] = false;
 
 # Allow postgres login to phpPgAdmin
-$conf['extra_login_security'] = true
+$conf['extra_login_security'] = true;
 
 # Reload PostgreSQL and httpd service
-$ sudo systemctl start postgresql-9.5.service
+$ sudo systemctl start postgresql-9.6.service
 $ sudo systemctl reload httpd.service
 ```
