@@ -1,15 +1,3 @@
-### Firewalld
-```shell
-# Show status
-$ systemctl status firewalld
-
-# Stop service
-$ systemctl stop firewalld
-
-# Disabled service
-$ systemctl disable firewalld
-```
-
 ### SELinux
 >**enforcing** - SELinux security policy is enforced.<br>
 >**permissive** - SELinux prints warnings instead of enforcing.<br>
