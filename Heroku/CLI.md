@@ -1,7 +1,7 @@
 ### CLI Usage
-```cmd
+```shell
 # Login
-$ heroku login
+> heroku login
 
 # Using an Http Proxy
 # For Unix
@@ -20,6 +20,16 @@ or
 > git clone https://github.com/heroku/node-js-getting-started.git
 > cd node-js-getting-started
 
+# Create an app
+> heroku create
+
+# Clone the repository
+> heroku git:clone -a mighty-plains-51050
+
+# Deploy the changes
+> git add .
+> git commit -am "your comment"
+> git push heroku master
 ```
 
 
