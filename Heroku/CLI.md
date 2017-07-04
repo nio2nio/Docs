@@ -11,10 +11,15 @@ $ EXPORT HTTPS_PROXY=http://proxy.server:port
 $ heroku login
 
 # For Windows
-$ set HTTP_PROXY=http://proxy.server:port
+> set HTTP_PROXY=http://proxy.server:port
 or
-$ set HTTPS_PROXY=http://proxy.server:port
-$ heroku login
+> set HTTPS_PROXY=http://proxy.server:port
+> heroku login
+
+# Prepare the app
+> git clone https://github.com/heroku/node-js-getting-started.git
+> cd node-js-getting-started
+
 ```
 
 
