@@ -1,5 +1,5 @@
 ### CLI Usage
-```shell
+```cmd
 # Login
 $ heroku login
 
