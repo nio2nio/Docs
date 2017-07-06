@@ -59,7 +59,7 @@ $conf['servers'][0]['host'] = 'localhost';
 $conf['owned_only'] = false;
 
 # Allow postgres login to phpPgAdmin
-$conf['extra_login_security'] = true;
+$conf['extra_login_security'] = false;
 
 # Reload PostgreSQL and httpd service
 $ sudo systemctl start postgresql-9.6.service
