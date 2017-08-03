@@ -11,6 +11,5 @@ fi
 $ vi .bashrc
 PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 ```
-
-### 重開terminal console
+#重開terminal console
 
