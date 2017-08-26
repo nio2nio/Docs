@@ -57,6 +57,7 @@ $ sudo vi /etc/httpd/conf/httpd.conf
   AllowOverride All
   Require all granted
 </Directory>
+```
 
 
 
