@@ -4,7 +4,7 @@ $ sudo yum remove docker docker-common docker-selinux docker-engine
 ```
 
 ### Set up the repository
-``shell
+```shell
 # Install required packages
 $ sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 
