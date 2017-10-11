@@ -31,3 +31,8 @@ $ sudo yum install <FULLY-QUALIFIED-PACKAGE-NAME>
 $ sudo systemctl start docker
 $ sudo systemctl enable docker
 ```
+
+### Add your user to the `docker` group
+```shell
+sudo usermod -aG docker $USER
+```
