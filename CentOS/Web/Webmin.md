@@ -1,4 +1,4 @@
-## Install Webmin
+### Install Webmin
 ```shell
 $ sudo vi /etc/yum.repos.d/webmin.repo
 [Webmin]
@@ -16,7 +16,7 @@ $ sudo yum install -y webmin
 # Navigate to https://your_domain:10000
 ```
 
-## Change webmin root password
+### Change webmin root password
 ```shell
 $ sudo /usr/libexec/webmin/changepass.pl /etc/webmin admin newpassword
 ```
