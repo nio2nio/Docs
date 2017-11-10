@@ -1,10 +1,10 @@
-## Transfer root privilege to a user.
+### Transfer root privilege to a user.
 ```shell
 $ sudo vi /etc/sudoers
 cent    ALL=(ALL)       ALL
 ```
 
-## Restrict users to execute some commands
+### Restrict users to execute some commands
 ```shell
 $ sudo vi /etc/sudoers
 Cmnd_Alias SHUTDOWN = /sbin/halt, /sbin/shutdown, /sbin/poweroff, /sbin/reboot, /sbin/init
@@ -12,7 +12,7 @@ Cmnd_Alias SHUTDOWN = /sbin/halt, /sbin/shutdown, /sbin/poweroff, /sbin/reboot, 
 centALL=(ALL)ALL, !SHUTDOWN
 ```
 
-## Transfer some commands with root privilege to users in a group.
+### Transfer some commands with root privilege to users in a group.
 ```shell
 $ sudo vi /etc/sudoers
 Cmnd_Alias USERMGR = /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, /usr/bin/passwd
@@ -20,7 +20,7 @@ Cmnd_Alias USERMGR = /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, /u
 %usermgr ALL=(ALL) USERMGR
 ```
 
-## The logs for sudo are kept in '/var/log/secure', but there are many kind of logs in it. So if you'd like to keep only sudo's log in a file
+### The logs for sudo are kept in '/var/log/secure', but there are many kind of logs in it. So if you'd like to keep only sudo's log in a file
 ```shell
 $ sudo vi /etc/sudoers
 # Add at the last line
