@@ -1,9 +1,9 @@
-## Install Vim
+### Install Vim
 ```shell
 $ sudo yum install -y vim
 ```
 
-## Set Alias
+### Set Alias
 ```shell
 $ sudo vi /etc/profile
 alias vi='vim'
@@ -12,7 +12,7 @@ alias vi='vim'
 $ source /etc/profile
 ```
 
-## Config Vim
+### Config Vim
 ```shell
 $ vi ~/.vimrc
 # use extended function of vim (no compatible with vi)
