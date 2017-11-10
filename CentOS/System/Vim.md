@@ -33,11 +33,11 @@ set smartcase
 set hlsearch
 set incsearch
 
-set number$
+set number
 # Visualize break($) or tab(^I)
 set list
 # Highlights parentheses
-set showmatch$
+set showmatch
 
 # Show color display
 syntax on
