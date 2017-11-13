@@ -45,4 +45,7 @@ $ sudo vi /etc/httpd/sites-avialable/example.com.conf
 
 # 連結設定檔至site-enabled
 $ sudo ln -S /etc/httpd/site-available/example.com.conf /etc/httpd/site-enabled/example.com.conf
+
+# 重啟Apache
+$ sudo systemctl restart httpd.service
 ```
