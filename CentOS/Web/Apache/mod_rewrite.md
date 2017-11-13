@@ -34,6 +34,7 @@ $ sudo systemctl restart httpd.service
 ```
 
 ### Configure rewrite module
+```
 RewriteRule pattern substitution [flags]
 RewriteRule: This directive specifies the name of the the mod_rewrite directive that you want to use.
 Pattern: This directive specifies a regular expression that matches the desired string
@@ -45,3 +46,4 @@ RewriteEngine On
 RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+```
