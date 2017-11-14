@@ -18,5 +18,5 @@ $ sudo yum install -y webmin
 
 ### Change webmin root password
 ```shell
-$ sudo /usr/libexec/webmin/changepass.pl /etc/webmin admin newpassword
+$ sudo /usr/libexec/webmin/changepass.pl /etc/webmin root newpassword
 ```
