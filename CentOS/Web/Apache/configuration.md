@@ -16,16 +16,14 @@ $ sudo vi /etc/httpd/conf/httpd.conf
 ServerAdmin root@your.domain
 ServerName your.domain:80
 
-<Directory "/var/www/html">
-  AllowOverride All
-  ...
-</Directory />
-
 <IfModule dir_module>
   DirectoryIndex index.html index.cgi index.php
 </IfModule>
 
+# Hide the Apache version
+ServerSignature Off
 ServerTokens Prod
+
 # KeepAlive sets whether the server allows more than one request per connection.
 KeepAlive On
 
@@ -51,15 +49,78 @@ KeepAliveTimeout 5
 
 # If AllowOverride is set to 'All', then Apache will attempt to open a .htaccess file in each directory that it visits.
 DocumentRoot /vaw/www/html/website1
-<Directory /> 
+<Directory /var/www/html> 
   AllowOverride All
+  ...
+</Directory>
+
+# Turn off directory listing
+<Directory /var/www/html>
+    Options -Indexes
+</Directory>
+
+# By default Apache follows symbolic links (symlinks). Turning this off is recommended for security.
+<Directory /var/www/html>
+  Options -FollowSymLinks 
+</Directory>
+
+# Turn off server-side includes (SSI) and CGI execution
+<Directory /var/www/html>
+  Options -ExecCGI -Includes
+</Directory>
+
+# You can limit the requests size by using the Apache directive LimitRequestBody in combination with the Directory tag. This can help protect your web server from a denial of service (DOS) attack.
+<Directory /var/www/html>
+  LimitRequestBody 204800
+</Directory>
+
+# Disallow browsing outside the document root
+# Unless you have a specific need, it is recommended to restrict Apache to being only able to access the document root.
+<Directory />
+  Options None
+  Order deny,allow
+  Deny from all
 </Directory>
 
 # DNS Lookups
 HostnameLookups Off
 
+# Secure Apache from clickjacking attacks
+# Clickjacking, also known as "User Interface redress attack," is a malicious technique to collect an infected user's clicks. Clickjacking tricks the victim (visitor) into clicking on an infected site. To avoid this, you need to use X-FRAME-OPTIONS to prevent your website from being used by clickjackers.
+Header append X-FRAME-OPTIONS "SAMEORIGIN"
+
+# Disable ETag
+# ETags (entity tags) are a well-known point of vulnerability in Apache web server. ETag is an HTTP response header that allows remote users to obtain sensitive information like inode number, child process ids, and multipart MIME boundary. ETag is enabled in Apache by default.
+FileETag None
+
+# HTTP request methods
+# Apache support the OPTIONS, GET, HEAD, POST, CONNECT, PUT, DELETE, and TRACE method in HTTP 1.1 protocol. Some of these may not be required, and may pose a potential security risk. It is a good idea to only enable HEAD, POST, and GET for web applications.
+<Directory /var/www/html>
+  <LimitExcept GET POST HEAD>
+    deny from all
+  </LimitExcept>
+</Directory>
+
+# Secure Apache from XSS attacks
+# Cross-site scripting (XSS) is one of the most common application-layer vulnerabilities in Apache server. XSS enables attackers to inject client-side script into web pages viewed by other users. Enabling XSS protection is recommended.
+<IfModule mod_headers.c>
+  Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Protect cookies with HTTPOnly flag
+# You can protect your Apache server from most of the common Cross Site Scripting attacks using the HttpOnly and Secure flags for cookies.
+<IfModule mod_headers.c>
+  Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+</IfModule>
+
 # Restart httpd service
 $ sudo systemctl restart httpd.service
+```
+
+### Disable unneccesary modules
+```shell
+$ sudo vi /etc/httpd/conf.modules.d/00-base.conf
+# Insert a # at the beginning of the following lines to disable the modules
 ```
 
 ### Configure Firewall
