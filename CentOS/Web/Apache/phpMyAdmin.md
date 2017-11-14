@@ -26,22 +26,4 @@ $ sudo systemctl restart httpd.service
 ```
 
 ## Setting up a Web Server Authentication Gate
-```shell
-$ sudo vi /etc/httpd/conf.d/phpMyAdmin
-<Directory /usr/share/phpMyAdmin/>
-   AllowOverride All
-   <IfModule mod_authz_core.c>
-   . . .
-</Directory>
-
-# Create An .htaccess File
-$ sudo vi /usr/share/phpMyAdmin/.htaccess
-AuthType Basic
-AuthName "Admin Login"
-AuthUserFile /etc/httpd/pma_pass
-Require valid-user
-
-# Create the Password File for Authentication
-# The -c flag indicates that this will create an initial file.
-$ sudo htpasswd -c /etc/httpd/pma_pass username
-```
+See Document [Here](/CentOS/Web/Apache/basic_authentication.md).
