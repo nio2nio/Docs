@@ -22,24 +22,27 @@ $ sudo vi /etc/httpd/conf.d/ssl.conf
 #SSLProtocol all -SSLv2
 #SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
 
-# Paste the following settings from the site AFTER the end of the VirtualHost block
-# from https://cipherli.st/
-# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_Apache2.html
-SSLCipherSuite EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH
-SSLProtocol All -SSLv2 -SSLv3
-SSLHonorCipherOrder On
-# Disable preloading HSTS for now.  You can use the commented out header line that includes
-# the "preload" directive if you understand the implications.
-#Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains; preload"
-Header always set Strict-Transport-Security "max-age=63072000; includeSubdomains"
-Header always set X-Frame-Options DENY
-Header always set X-Content-Type-Options nosniff
-# Requires Apache >= 2.4
-SSLCompression off
-SSLUseStapling on
-SSLStaplingCache "shmcb:logs/stapling-cache(150000)"
-# Requires Apache >= 2.4.11
-# SSLSessionTickets Off
+$ sudo vi /etc/httpd/conf/httpd.conf
+# Comment the following line (certbot will append automatically)
+#Include /etc/httpd/sites-available/example.com-le-ssl.conf
+
+$ sudo vi /etc/httpd/sites-available/example.com.conf
+# If you choose Redirect, certbot will append the following lines
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =www.example.com [OR]
+RewriteCond %{SERVER_NAME} =example.com
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+
+$ sudo vi /etc/httpd/sites-available/example.com-le-ssl.conf
+SSLCertificateFile /etc/letsencrypt/live/example.com/cert.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
+Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateChainFile /etc/letsencrypt/live/example.com/chain.pem
+
+$ sudo vi /etc/letencrypt/options-ssl.apache.conf
+SSLEngine on
+SSLProtocol             all -SSLv2 -SSLv3
+SSLCipherSuite          ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
 
 # Check apache configuration
 $ sudo apachectl configtest
