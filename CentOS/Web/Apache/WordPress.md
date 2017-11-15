@@ -70,7 +70,6 @@ UPDATE table_prefix_posts SET guid = replace(guid, 'old_domain', 'new_domain');
 UPDATE table_prefix_posts SET post_content = replace(post_content, 'old_domain', 'new_domain');
 
 ### Drop All Table
-```sql
 DROP TABLE `XJe4v7Yi_commentmeta`;
 DROP TABLE `XJe4v7Yi_comments`;
 DROP TABLE `XJe4v7Yi_icl_content_status`;
