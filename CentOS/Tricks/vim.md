@@ -42,7 +42,7 @@ set showmatch
 # Show color display
 syntax on
 # Change colors for comments 
-highlight Commnet ctermfg=LightCyan
+highlight Comment ctermfg=LightCyan
 
 # Wrap lines
 set wrap
