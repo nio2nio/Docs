@@ -308,9 +308,9 @@
   sudo openssl x509 -req -days 365 -in ca.csr -signkey -out ca.crt
 
   # Copy all of the certificate files to the necessary directories.
-  $ sudo cp ca.crt /etc/pki/tls/certs
-  $ sudo cp ca.key /etc/pki/tls/private
-  $ sudo cp ca.csr /etc/pki/tls/private
+  sudo cp ca.crt /etc/pki/tls/certs
+  sudo cp ca.key /etc/pki/tls/private
+  sudo cp ca.csr /etc/pki/tls/private
   ```
   * Configure SSL
   ```shell
