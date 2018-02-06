@@ -49,6 +49,40 @@
 sudo hostnamectl set-hostname host.example.com
 ```
 
+### nmcli
+  * Show device
+  ```shell
+  nmcli d
+  ```
+  * Set IPv4 Address
+  ```shell
+  nmcli c modify eth0 ipv4.addresses 10.0.0.30/24
+  ```
+  * Set default gateway
+  ```shell
+  nmcli c modify eth0 ipv4.gateway 10.0.0.1
+  ```
+  * Set DNS
+  ```shell
+  nmcli c modify eth0 ipv4.dns 10.0.0.1 
+  ```
+  * Set DHCP (auto) Or Static (manual)
+  ```shell
+  nmcli c modify eth0 ipv4.method manual
+  ```
+  * Reload configuration
+  ```shell
+  nmcli c down eth0; nmcli c up eth0 
+  ```
+  * Show configuration
+  ```shell
+  nmcli d show eth0 
+  ```
+  * Show status
+  ```shell
+  ip addr show
+  ```
+
 ### Set the Timezone
 ```shell
 # View the list of available time zones
