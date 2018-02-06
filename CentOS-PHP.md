@@ -24,8 +24,8 @@
   
   sudo systemctl restart httpd.service
   ```
-  * Secure phpMyAdmin Instance
-  ```shell (**`/etc/httpd/conf.d/phpMyAdmin`**)
+  * Secure phpMyAdmin Instance (**`/etc/httpd/conf.d/phpMyAdmin`**)
+  ```shell 
   # Comment out the existing lines
   # Alias /phpMyAdmin /usr/share/phpMyAdmin
   # Alias /phpmyadmin /usr/share/phpMyAdmin
