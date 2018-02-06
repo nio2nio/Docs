@@ -33,32 +33,46 @@ vi /etc/sudoers
 ```
 
 ### Harden SSH Access
-```shell
-# Create an Authentication Key-pairPermalink (On your own device)
-ssh-keygen -b 4096 
+  * Create an Authentication Key-pairPermalink (On your own device)
+  ```shell
+  ssh-keygen -b 4096 
+  ```
+  * Upload the public key to your Linode
+  ```shell
+  ssh-copy-id demo_user@xxx.xxx.xxx.xxx
+  ```
+  * Set permissions for the public key directory and the key file itself
+  ```shell
+  sudo chmod 700 -R ~/.ssh && chmod 600 ~/.ssh/authorized_keys
+  ```
+  * SSH Daemon Options
+  ```shell
+  sudo vi /etc/ssh/sshd_config
+  # Custom Port
+  Port 513113
+  
+  # 限制使用者登入
+  AllowUsers userAccount1 userAccount2 ...
+  
+  # Disallow root logins over SSH
+  PermitRootLogin no
 
-# Upload the public key to your Linode
-ssh-copy-id demo_user@xxx.xxx.xxx.xxx
+  # Disable SSH password authentication
+  PasswordAuthentication no
 
-# Set permissions for the public key directory and the key file itself
-sudo chmod 700 -R ~/.ssh && chmod 600 ~/.ssh/authorized_keys
-
-# SSH Daemon Options
-sudo vi /etc/ssh/sshd_config
-
-# Disallow root logins over SSH
-PermitRootLogin no
-
-# Disable SSH password authentication
-PasswordAuthentication no
-
-# Listen on only one internet protocol
-AddressFamily inet/inet6/any
-
-# Restart the SSH service to load the new configuration.
-sudo systemctl restart sshd.service
-```
-
+  # Listen on only one internet protocol
+  AddressFamily inet/inet6/any
+  ```
+  * Restart the SSH service to load the new configuration.
+  ```shell
+  sudo systemctl restart sshd.service
+  ```
+  * Firewall Configuration
+  ```shell
+  sudo firewall-cmd --zone=public --add-port=51449/tcp --permanent
+  ```
 ### Use Fail2Ban for SSH Login Protection
 
 ### FirewallD
+
+
