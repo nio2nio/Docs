@@ -1,14 +1,14 @@
-### 1. Update System
+### Update System
 ```shell
-$ sudo yum update -y
+sudo yum update -y
 ```
 
-### 2. Install LAMP
+### Install LAMP
 ```shell
-$ sudo yum install httpd mariadb mariadb-server php php-common php-mysql php-gd php-xml php-mbstring php-mcrypt php-xmlrpc unzip wget -y
+sudo yum install httpd mariadb mariadb-server php php-common php-mysql php-gd php-xml php-mbstring php-mcrypt php-xmlrpc unzip wget -y
 ```
 
-### 3. Start Apache and MariaDB Service
+### Start Apache and MariaDB Service
 ```shell
 $ sudo systemctl start httpd.service
 $ sudo systemctl start mariadb.service
@@ -49,9 +49,8 @@ define('DB_USER', 'user');
 define('DB_PASSWORD', 'password');
 ```
 
-### HTTP Environment
+### Apache Configuration (**`/etc/httpd/conf/httpd.conf`**)
 ```shell
-$ sudo vi /etc/httpd/conf/httpd.conf
 <Directory "/var/www/html">
   Options Indexes FollowSymLinks
   AllowOverride All
