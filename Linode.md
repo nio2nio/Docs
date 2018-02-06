@@ -24,12 +24,13 @@ date
 useradd new_user && passwd new_user
 usermod -aG wheel new_user
 
+vi /etc/pam.d/su
+auth    required    pam_wheel.so use_uid (uncomment this line)
+
 # In CentOS 6 a wheel group is disabled by default for sudo access.
 vi /etc/sudoers 
 /usr/sbin/visudo
-
-# uncomment this line
-%wheel  ALL=(ALL)   ALL
+%wheel  ALL=(ALL)   ALL (uncomment this line)
 ```
 
 ### Sudo (/etc/sudoers)
