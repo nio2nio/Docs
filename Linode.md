@@ -32,6 +32,34 @@ vi /etc/sudoers
 %wheel  ALL=(ALL)   ALL
 ```
 
+### Sudo (/etc/sudoers)
+  * Transfer root privilege to a user.
+  ```shell
+  cent    ALL=(ALL)       ALL
+  ```
+  * Restrict users to execute some commands
+  ```shell
+  Cmnd_Alias SHUTDOWN = /sbin/halt, /sbin/shutdown, /sbin/poweroff, /sbin/reboot, /sbin/init
+  centALL=(ALL)ALL, !SHUTDOWN
+  ```
+  * Transfer some commands with root privilege to users in a group.
+  ```shell
+  Cmnd_Alias USERMGR = /usr/sbin/useradd, /usr/sbin/userdel, /usr/sbin/usermod, /usr/bin/passwd
+  %usermgr ALL=(ALL) USERMGR
+  ```
+  * The logs for sudo are kept in '/var/log/secure', but there are many kind of logs in it. So if you'd like to keep only sudo's log in a file
+  ```shell
+  # /etc/sudoers 
+  Defaults syslog=local1
+  
+  # /etc/rsyslog.conf 
+  *.info;mail.none;authpriv.none;cron.none;local1.none   /var/log/messages (line:54)
+  local1.*  /var/log/sudo.log (add this line)
+  
+  # Restart syslog service
+  sudo systemctl restart rsyslog.service
+  ```
+  
 ### SELINUX
 > **`enforcing`** - SELinux security policy is enforced.<br>
 > **`permissive`** - SELinux prints warnings instead of enforcing.<br>
