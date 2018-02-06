@@ -459,3 +459,13 @@
   ```shell
   /usr/sbin/logwatch --mailto user@example.com --format html --service secure
   ```
+
+### Issues
+  * Permission denied because search permissions are missing on a component of the path, after chmod and chgrp
+  ```shell
+  find /var/www -type d -exec chmod 755 {} \;
+  find /var/www -type f -exec chmod 644 {} \;
+  
+  # Usually the execute permission for one path is not set, like it was in this question. The easiest way to solve this is the following command:
+  chmod a+rX -R /var/www
+  ```
