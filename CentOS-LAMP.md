@@ -1,18 +1,31 @@
-### Apache
+### Apache Basic
   * Installation
   ```shell
   sudo yum install httpd
-  ```
-  * Remove welcome page
-  ```shell
-  sudo rm -fr /etc/httpd/conf.d/welcome.conf
   ```
   * Start httpd service
   ```shell
   sudo systemctl start httpd.service
   sudo systemctl enable httpd.service
   ```
-  * Configuration (**`/etc/httpd/conf/httpd.conf`**)
+  * Firewall
+  ```shell
+  sudo firewall-cmd --zone=public --permanent --add-service=http ex:Service Name
+  sudo firewall-cmd --zone=public --permanent --add-port=5432/tcp ex:Port/Protocol (TCP/UDP)
+  sudo firewall-cmd --reload
+  ```
+  * SELinux
+  ```shell
+  sudo setsebool -P httpd_can_network_connect on
+  sudo setsebool -P httpd_can_network_connect_db on
+  ```
+
+### Apache Cofiguration (**`/etc/httpd/conf/httpd.conf`**)
+  * Remove welcome page
+  ```shell
+  sudo rm -fr /etc/httpd/conf.d/welcome.conf
+  ```
+  * Index
   ```shell
   <IfModule dir_module>
     DirectoryIndex index.html index.cgi index.php<br>
@@ -23,7 +36,7 @@
   ServerSignature Off
   ServerTokens Prod
   ```
-  * **`KeepAlive`** sets whether the server allows more than one request per connection.
+  * **`KeepAlive`**: allows more than one request per connection.
   ```shell
   KeepAlive On
   ```
@@ -127,14 +140,29 @@
   sudo vi /etc/httpd/conf.modules.d/00-base.conf
   # Insert a # at the beginning of the following lines to disable the modules
   ```
-  * Configure Firewall
+
+### Basic Authentication
+  * Configure apache to allow .htaccess authentication
   ```shell
-  sudo firewall-cmd --zone=public --permanent --add-service=http ex:Service Name
-  sudo firewall-cmd --zone=public --permanent --add-port=5432/tcp ex:Port/Protocol (TCP/UDP)
-  sudo firewall-cmd --reload
-  ```
-  * SELinux
-  ```shell
-  sudo setsebool -P httpd_can_network_connect on
-  sudo setsebool -P httpd_can_network_connect_db on
-  ```
+  sudo vi /etc/httpd/conf/httpd.conf
+ <Directory /var/www/html>
+   AllowOverride AuthConfig
+ </Directory>
+ ```
+ * Create password file with htpasswd
+ ```shell
+ # Only use -c the first time you create the file. Do not use -c when you add a user in the future.
+ sudo htpasswd -c /etc/httpd/.htpasswd user1
+ sudo htpasswd /etc/httpd/.htpasswd user2
+ sudo chown apache:apache /etc/httpd/.htpasswd
+ sudo chmod 0600 /etc/httpd/.htpasswd
+ ```
+ * Configure apache password authentication
+ ```shell
+ sudo vi /var/www/html/.htaccess
+ AuthType Basic
+ AuthName "Your Auth Name"
+ AuthUserFile /etc/httpd/.htpasswd
+ Require valid-user
+ ```
+  
