@@ -36,10 +36,10 @@
   KeepAliveTimeout 5
   ```
   * Configure MPM Prefork
-  > **`StartServers`**: This directive sets the number of child server processes created on startup. It is a good idea to increase this number on a high-load server, so the server is ready to handle a lot of connections.
-  > **`MinSpareServers`**: This directive sets the minimum number of idle child server processes. This value will need to be tuned for high-load servers.
-  > **`MaxSpareServers`**: This directive sets the maximum number of idle child server processes. When there are more idle child server processes than defined by MaxSpareServers the idle process will be killed.
-  > **`MaxClients`**: This directive sets the maximum number of simultaneous requests that Apache will handle. When this limit has been reached, any other connection attempts will be queued. Number of MaxClients = (Total RAM memory – RAM memory used for other process except Apache process) / (Memory used by a single Apache process)
+  > **`StartServers`**: This directive sets the number of child server processes created on startup. It is a good idea to increase this number on a high-load server, so the server is ready to handle a lot of connections.<br>
+  > **`MinSpareServers`**: This directive sets the minimum number of idle child server processes. This value will need to be tuned for high-load servers.<br>
+  > **`MaxSpareServers`**: This directive sets the maximum number of idle child server processes. When there are more idle child server processes than defined by MaxSpareServers the idle process will be killed.<br>
+  > **`MaxClients`**: This directive sets the maximum number of simultaneous requests that Apache will handle. When this limit has been reached, any other connection attempts will be queued. Number of MaxClients = (Total RAM memory – RAM memory used for other process except Apache process) / (Memory used by a single Apache process)<br>
   > **`MaxRequestsPerChild`**: This directive sets how many requests a child process will handle before terminating. Once the limit has been reached, the child process will die.
   ```shell
   <IfModule prefork.c>
