@@ -274,7 +274,7 @@
   IncludeOptional sites-enabled/*.conf
   ```
   * 建立虛擬主機設定檔
-  ```shell
+  ```shell
   sudo vi /etc/httpd/sites-avialable/example.com.conf
   <VirtualHost *:80>
       ServerAdmin webmaster@dummy-host.example.com    
