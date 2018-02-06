@@ -1,7 +1,48 @@
-### Install Software Update
-```shell
-sudo yum update -y
-```
+### Install Software Update (Yum)
+  * Proxy Configuration
+  ```shell
+  vi /etc/yum.conf
+  proxy=http://ip:port
+  ```
+  * Epel (Extra Packages for Enterprise Linux 7)
+  ```shell
+  yum install -y epel-release
+  ```
+  
+  * Cheat Sheet
+  ```shell
+  yum install package
+  # 升級全部套件
+  yum update
+  yum update package
+  # 升級全部套件及發行版本
+  yum upgrade
+  yum remove package
+  yum clean (/var/cache/yum)
+  
+  # 查詢
+  yum info package
+  yum search keyword
+  yum list package
+  # 查詢所有可更新的套件
+  yum list updates
+  # 查詢所有已安裝的套件
+  yum list installed
+  # 查詢特定檔案存在於什麼套件之中
+  yum provides 檔案名稱
+  yum provides */檔案名稱
+  yum resolvedep 檔案名稱
+  
+  # 套件組
+  yum grouplist
+  yum groupinstall "Group Name"
+  yum groupupdate "Group Name"
+  yum groupremove "Group Name"
+  yum groupinfo "Group Name"
+  
+  # 當安裝套件時出現錯誤訊息:pkgKey xxx doesn't exist in repo base
+  yum clean metadata
+  ```
 ### Set the Hostname
 ```shell
 sudo hostnamectl set-hostname host.example.com
