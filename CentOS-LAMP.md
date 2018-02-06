@@ -13,8 +13,8 @@
   sudo systemctl enable httpd.service
   ```
   * Configuration (**`/etc/httpd/conf/httpd.conf`**)
-  > \<IfModule dir_module\>
-  >   DirectoryIndex index.html index.cgi index.php
+  > \<IfModule dir_module\><br>
+  >   DirectoryIndex index.html index.cgi index.php<br>
   > \<\/IfModule\>
   * Hide the Apache version
   > ServerSignature Off
