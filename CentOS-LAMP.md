@@ -270,6 +270,7 @@
 
   # 編輯Apache設定檔
   sudo vi /etc/httpd/conf/httpd.conf
+  
   # 新增設定
   IncludeOptional sites-enabled/*.conf
   ```
