@@ -148,9 +148,8 @@
   sudo chown apache:apache /etc/httpd/.htpasswd
   sudo chmod 0600 /etc/httpd/.htpasswd
   ```
-  * Configure apache password authentication
+  * Configure apache password authentication (**`/var/www/html/.htaccess`**)
   ```shell
-  sudo vi /var/www/html/.htaccess
   AuthType Basic
   AuthName "Your Auth Name"
   AuthUserFile /etc/httpd/.htpasswd
@@ -218,19 +217,15 @@
   ```
   
 ### mod_rewrite 
-  * Enable mod_rewrite module
+  * Enable mod_rewrite module (**`/etc/httpd/conf.modules.d/00-base.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf.modules.d/00-base.conf
-
   # uncomment the following line
   LoadModule rewrite_module modules/mod_rewrite.so
 
-  # restart httpd service
   sudo systemctl restart httpd.service
   ```
-  * Enable .htaccess file
+  * Enable .htaccess file (**`/etc/httpd/conf/httpd.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf/httpd.conf
   <Directory /var/www/html>
     AllowOverride All
   </Directory>
@@ -251,30 +246,28 @@
   ```
 
 ### Virtual Host
-  * 設定虛擬主機
+  * 建立虛擬目錄
   ```shell
-  #  建立虛擬目錄
   sudo makir -p /var/www/example.com/public_html
-
-  # 變更擁有權
+  ```
+  * 變更擁有權
+  ```shell
   sudo chown -R apache:apache /var/www/example.com/public_html
-
-  # 變更目錄權限
+  ```
+  * 變更目錄權限
+  ```shell
   sudo chmod -R 755 /var/www
-
-  # 建立設定檔目錄
+  ```
+  * 建立設定檔目錄
+  ```shell
   sudo mkdir /etc/httpd/sites-available
   sudo mkdir /etc/httpd/sites-enabled
-
-  # 編輯Apache設定檔
-  sudo vi /etc/httpd/conf/httpd.conf
-  
+  ```shell
   # 新增設定
   IncludeOptional sites-enabled/*.conf
   ```
-  * 建立虛擬主機設定檔
+  * 建立虛擬主機設定檔 (**`/etc/httpd/sites-avialable/example.com.conf`**)
   ```shell
-  sudo vi /etc/httpd/sites-avialable/example.com.conf
   <VirtualHost *:80>
       ServerAdmin webmaster@dummy-host.example.com    
       ServerName www.coolexample.com
@@ -283,8 +276,9 @@
       ErrorLog /var/www/example.com/error.log 
       CustomLog /var/www/example.com/requests.log combined 
   </VirtualHost>
-
-  # 連結設定檔至site-enabled
+  ```
+  * 連結設定檔至site-enabled
+  ```shell
   sudo ln -s /etc/httpd/site-available/example.com.conf /etc/httpd/site-enabled/example.com.conf
   
   sudo systemctl restart httpd.service
@@ -337,36 +331,40 @@
   sudo certbot --apache -d example.com -d www.example.com
   # Generated certificates files will be located in /etc/letsencrypt/live
   ```
-  * Apache SSL Configuration
+  * Apache SSL Configuration (**`/etc/httpd/conf.d/ssl.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf.d/ssl.conf
   # Comment SSLProtocol, SSLCipherSuite 2 lines
   #SSLProtocol all -SSLv2
   #SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
-
-  sudo vi /etc/httpd/conf/httpd.conf
+  ```
+  * Configuration (**`/etc/httpd/conf/httpd.conf`**)
+  ```shell
   # Comment the following line (certbot will append automatically)
   #Include /etc/httpd/sites-available/example.com-le-ssl.conf
-
-  sudo vi /etc/httpd/sites-available/example.com.conf
+  ```
+  * Configuration (**`/etc/httpd/sites-available/example.com.conf`**)
+  ```shell
   # If you choose Redirect, certbot will append the following lines
   RewriteEngine on
   RewriteCond %{SERVER_NAME} =www.example.com [OR]
   RewriteCond %{SERVER_NAME} =example.com
   RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
-
-  sudo vi /etc/httpd/sites-available/example.com-le-ssl.conf
+  ```
+  * Configuration (**`/etc/httpd/sites-available/example.com-le-ssl.conf`**)
+  ```shell
   SSLCertificateFile /etc/letsencrypt/live/example.com/cert.pem
   SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
   Include /etc/letsencrypt/options-ssl-apache.conf
   SSLCertificateChainFile /etc/letsencrypt/live/example.com/chain.pem
-
-  sudo vi /etc/letencrypt/options-ssl.apache.conf
+  ```
+  * Configuration (**`/etc/letencrypt/options-ssl.apache.conf`**)
+  ```
   SSLEngine on
   SSLProtocol             all -SSLv2 -SSLv3
   SSLCipherSuite          ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
-
-  # Check apache configuration And Restart Service
+  ```
+  * Check apache configuration And Restart Service
+  ```shell
   sudo apachectl configtest
   sudo systemctl restart httpd.service
   ```
