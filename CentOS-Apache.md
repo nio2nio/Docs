@@ -262,8 +262,9 @@
   ```shell
   sudo mkdir /etc/httpd/sites-available
   sudo mkdir /etc/httpd/sites-enabled
+  ```
+  * 新增設定 (**`/etc/httpd/conf/httpd.conf`**)
   ```shell
-  # 新增設定
   IncludeOptional sites-enabled/*.conf
   ```
   * 建立虛擬主機設定檔 (**`/etc/httpd/sites-avialable/example.com.conf`**)
