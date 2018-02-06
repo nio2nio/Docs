@@ -13,9 +13,9 @@
   sudo systemctl enable httpd.service
   ```
   * Configuration (**`/etc/httpd/conf/httpd.conf`**)
-  > <IfModule dir_module>
+  > \<IfModule dir_module\>
   >   DirectoryIndex index.html index.cgi index.php
-  > </IfModule>
+  > \<\/IfModule\>
   * Hide the Apache version
   > ServerSignature Off
   > ServerTokens Prod
