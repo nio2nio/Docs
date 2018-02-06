@@ -200,6 +200,45 @@ reboot
   ```
   * **`w`** 指令可以列出 Linux 系統上目前有哪些使用者登入，並且顯示每個使用者正在執行的指令
   
+### Vim
+  * Set Alias
+  ```shell
+  sudo vi /etc/profile
+  alias vi='vim'
+  
+  # Reload
+  source /etc/profile
+  ```
+  * Configuration
+  ```shell
+  vi ~/.vimrc
+  set nocompatible
+
+  set encoding=utf-8
+  set fileencoding=utf-8
+  set fileformats=unix,dos
+
+  set backup
+  set backupdir=~/backup
+  set history=50
+
+  set ignorecase
+  # Highlights matched words
+  set smartcase
+  set hlsearch
+  set incsearch
+
+  set number
+  # Highlights parentheses
+  set showmatch
+
+  # Show color display
+  syntax on
+  # Change colors for comments 
+  highlight Comment ctermfg=LightCyan
+  set wrap
+  ```
+  
 ### Use Fail2Ban for SSH Login Protection
 
 ### FirewallD
