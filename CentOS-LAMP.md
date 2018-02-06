@@ -240,7 +240,7 @@
   restart httpd service
   ```
   * Configure rewrite module
-  > **`RewriteRule pattern substitution \[flags\]`**<br>
+  > **`RewriteRule pattern substitution [flags]`**<br>
   > **`RewriteRule`**: This directive specifies the name of the the mod_rewrite directive that you want to use.<br>
   > **`Pattern`**: This directive specifies a regular expression that matches the desired string.<br>
   > **`Substitution`**: This directive specifies the path of the actual URL of the page with the information you want to display.<br>
@@ -252,4 +252,77 @@
   RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
   ```
 
+### Virtual Host
+  * 設定虛擬主機
+  ```shell
+  #  建立虛擬目錄
+  sudo makir -p /var/www/example.com/public_html
 
+  # 變更擁有權
+  sudo chown -R apache:apache /var/www/example.com/public_html
+
+  # 變更目錄權限
+  sudo chmod -R 755 /var/www
+
+  # 建立設定檔目錄
+  sudo mkdir /etc/httpd/sites-available
+  sudo mkdir /etc/httpd/sites-enabled
+
+  # 編輯Apache設定檔
+  sudo vi /etc/httpd/conf/httpd.conf
+  # 新增設定
+  IncludeOptional sites-enabled/*.conf
+  ```
+  * 建立虛擬主機設定檔
+  ```shell
+  sudo vi /etc/httpd/sites-avialable/example.com.conf
+  <VirtualHost *:80>
+      ServerAdmin webmaster@dummy-host.example.com    
+      ServerName www.coolexample.com
+      ServerAlias coolexample.com 
+      DocumentRoot /var/www/example.com/public_html 
+      ErrorLog /var/www/example.com/error.log 
+      CustomLog /var/www/example.com/requests.log combined 
+  </VirtualHost>
+
+  # 連結設定檔至site-enabled
+  sudo ln -s /etc/httpd/site-available/example.com.conf /etc/httpd/site-enabled/example.com.conf
+
+  # 重啟Apache
+  sudo systemctl restart httpd.service
+  ```
+  
+### SSL
+  * Install SSL
+  ```shell
+  sudo yum install -y mod_ssl openssl
+  ```
+  * Create certificate
+  ```shell
+  # Generate a private key ca.key with 2048-bit encryption.
+  sudo openssl genrsa -out ca.key 2048
+
+  # Generate the certificate signing request cs.csr
+  sudo openssl req -new -key ca.key -out ca.csr
+
+  # Generate a self-signed certificate ca.crt of X509 type valid for 365 keys.
+  sudo openssl x509 -req -days 365 -in ca.csr -signkey -out ca.crt
+
+  # Copy all of the certificate files to the necessary directories.
+  $ sudo cp ca.crt /etc/pki/tls/certs
+  $ sudo cp ca.key /etc/pki/tls/private
+  $ sudo cp ca.csr /etc/pki/tls/private
+  ```
+  * Configure SSL
+  ```shell
+  sudo vi /etc/httpd/conf.d/ssl.conf
+  DocumentRoot "/var/www/html"
+  ServerName your.domain:443
+  SSLEngine on
+  SSLProtocol -All +TLSv1 +TLSv1.1 +TLSv1.2
+  SSLCertificateFile /etc/pki/tls/certs/ca.crt
+  SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+
+  # Restart httpd.service
+  sudo systemctl restart httpd.service
+  ```
