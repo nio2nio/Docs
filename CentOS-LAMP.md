@@ -63,14 +63,6 @@
      MaxRequestsPerChild 3000
   </IfModule>
   ```
-  * If AllowOverride is set to 'All', then Apache will attempt to open a **`.htaccess`** file in each directory that it visits.
-  ```shell
-  DocumentRoot /vaw/www/html/website1
-  <Directory /var/www/html> 
-    AllowOverride All
-    ...
-  </Directory>
-  ```
   * Turn off directory listing
   ```shell
   <Directory /var/www/html>
@@ -221,4 +213,43 @@
 
   sudo systemctl restart httpd.service
   ```
+  * Test
+  ```shell
+  wget --header="Accept-Encoding: gzip" http://your.ip/jquery-3.2.1.js
+  du -hs jquery-3.2.1.js
+  ```
+  
+### mod_rewrite 
+  * Enable mod_rewrite module
+  ```shell
+  sudo vi /etc/httpd/conf.modules.d/00-base.conf
+
+  # uncomment the following line
+  LoadModule rewrite_module modules/mod_rewrite.so
+
+  # restart httpd service
+  sudo systemctl restart httpd.service
+  ```
+  * Enable .htaccess file
+  ```shell
+  sudo vi /etc/httpd/conf/httpd.conf
+  <Directory /var/www/html>
+    AllowOverride All
+  </Directory>
+
+  restart httpd service
+  ```
+  * Configure rewrite module
+  > **`RewriteRule pattern substitution \[flags\]`**<br>
+  > **`RewriteRule`**: This directive specifies the name of the the mod_rewrite directive that you want to use.<br>
+  > **`Pattern`**: This directive specifies a regular expression that matches the desired string.<br>
+  > **`Substitution`**: This directive specifies the path of the actual URL of the page with the information you want to display.<br>
+  > **`Flags`**: A flag is a tag at the end of the Rewrite Rule directive that specifies optional parameters that can modify the rule.
+  ```shell
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+  ```
+
 
