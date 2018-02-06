@@ -272,7 +272,7 @@
   sudo vi /etc/httpd/conf/httpd.conf
   # 新增設定
   IncludeOptional sites-enabled/*.conf
-  ```
+  ```
   * 建立虛擬主機設定檔
   ```shell
   sudo vi /etc/httpd/sites-avialable/example.com.conf
