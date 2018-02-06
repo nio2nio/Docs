@@ -33,10 +33,20 @@ vi /etc/sudoers
 ```
 
 ### SELINUX
-> enforcing - SELinux security policy is enforced.
-> permissive - SELinux prints warnings instead of enforcing.
-> disabled - No SELinux policy is loaded.
+> **`enforcing`** - SELinux security policy is enforced.<br>
+> **`permissive`** - SELinux prints warnings instead of enforcing.<br>
+> **`disabled`** - No SELinux policy is loaded.
+```shell
+# Show status
+getenforce
 
+# Configure SELinux
+sudo vi /etc/selinux/config
+SELinux=disabled
+
+# Reboot
+reboot
+```
 
 ### Harden SSH Access
   * Create an Authentication Key-pairPermalink (On your own device)
