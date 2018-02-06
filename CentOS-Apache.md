@@ -3,12 +3,12 @@
   ```shell
   sudo yum install httpd
   ```
-  * Start httpd service
+  * Service Management
   ```shell
   sudo systemctl start httpd.service
   sudo systemctl enable httpd.service
   ```
-  * Firewall
+  * FirewallD
   ```shell
   sudo firewall-cmd --zone=public --permanent --add-service=http ex:Service Name
   sudo firewall-cmd --zone=public --permanent --add-port=5432/tcp ex:Port/Protocol (TCP/UDP)
@@ -134,9 +134,8 @@
   ```
 
 ### Basic Authentication
-  * Configure apache to allow .htaccess authentication
+  * Configuration (**`/etc/httpd/conf/httpd.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf/httpd.conf
   <Directory /var/www/html>
     AllowOverride AuthConfig
   </Directory>
@@ -159,9 +158,8 @@
   ```
   
 ### User Directory
-  * Configure httpd
+  * Configuration(**`/etc/httpd/conf.d/userdir.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf.d/userdir.conf
   # UserDir disabled
   UserDir public_html
 
@@ -198,12 +196,12 @@
   ```shell
   sudo httpd -M | grep deflate
   ```
+  * Configuration (**`/etc/httpd/conf.d/mod_deflate.conf`**)
   > **`DeflateCompressionLevel`** : This directive specify the compression level of file. By default, this level is 9. You can set up this level between 1 to 9.<br>
   > **`DeflateMemLevel`** : This directive specifies how much memory should be used by zlib for compression. The default value is 9 . You can set up this value between 1 to 9.<br>
   > **`DeflateWindowSize`** : This directive specifies the zlib compression window size. The default value is 15. You can set up this value between 1 to 15. Higher number means higher compression level, but it will use more server resources.
   * Configure mod_deflate
   ```shell
-  sudo vi /etc/httpd/conf.d/mod_deflate.conf
   <filesMatch "\.(js|html|txt)$">
      SetOutputFilter DEFLATE
   </filesMatch>
@@ -313,9 +311,8 @@
   sudo cp ca.key /etc/pki/tls/private
   sudo cp ca.csr /etc/pki/tls/private
   ```
-  * Configure SSL
+  * Configuration (**`/etc/httpd/conf.d/ssl.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf.d/ssl.conf
   DocumentRoot "/var/www/html"
   ServerName your.domain:443
   SSLEngine on
@@ -342,7 +339,7 @@
   ```
   * Apache SSL Configuration
   ```shell
-  udo vi /etc/httpd/conf.d/ssl.conf
+  sudo vi /etc/httpd/conf.d/ssl.conf
   # Comment SSLProtocol, SSLCipherSuite 2 lines
   #SSLProtocol all -SSLv2
   #SSLCipherSuite HIGH:MEDIUM:!aNULL:!MD5:!SEED:!IDEA
@@ -369,7 +366,7 @@
   SSLProtocol             all -SSLv2 -SSLv3
   SSLCipherSuite          ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA
 
-  # Check apache configuration
+  # Check apache configuration And Restart Service
   sudo apachectl configtest
   sudo systemctl restart httpd.service
   ```
@@ -393,9 +390,8 @@
   sudo yum install epel-release
   sudo yum install awstats
   ```
-  * Configuration
+  * Configuration (**`/etc/httpd/conf.d/awstats.conf`**)
   ```shell
-  sudo vi /etc/httpd/conf.d/awstats.conf
   <Directory "/usr/share/awstats/wwwroot">
       Options None
       AllowOverride All
@@ -436,3 +432,31 @@
   ```
   * Access AWStats in a browser
   > http://your.server.ip/awstats/awstats.pl?config=example.com
+  
+### logwatch
+  * Installation
+  ```shell
+  sudo yum install logwatch
+  ```
+  * Configuration (**`/etc/logwatch/conf/logwatch.conf`**)
+  ```shell
+  # The email report will be delivered to the local root user by default. To specify an alternate email address, create a new file called /etc/logwatch/conf/logwatch.conf and add the following line.
+  MailTo = user@example.com
+
+  # The default log summary email will be in standard text format. 
+  Format = html
+
+  # The email sender can be changed from Logwatch to another local user or email address by setting the MailFrom value.
+  MailFrom = user@example.com
+
+  # The summary includes a list of services that list can be found in the /usr/share/logwatch/scripts/services/ directory. Those services can be excluded from the summary by prepending a hyphen to the Service name value.
+  Service = All
+  Service = "-ftpd-xferlog"
+
+  # Additional customizations to logwatch.conf can be found in the default global configuration file.
+  /usr/share/logwatch/default.conf/logwatch.conf
+  ```
+  * Run manually
+  ```shell
+  /usr/sbin/logwatch --mailto user@example.com --format html --service secure
+  ```
