@@ -3,7 +3,7 @@
   2. It manages rulesets dynamically, allowing updates **without breaking existing sessions and connections**.
 
 * Installing and Managing FirewallDPermalink
-  1. To start the service and enable FirewallD on boot
+  ** To start the service and enable FirewallD on boot
   ```shell
   sudo systemctl start firewalld.service
   sudo systemctl enable firewalld.service
