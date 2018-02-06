@@ -32,6 +32,12 @@ vi /etc/sudoers
 %wheel  ALL=(ALL)   ALL
 ```
 
+### SELINUX
+> enforcing - SELinux security policy is enforced.
+> permissive - SELinux prints warnings instead of enforcing.
+> disabled - No SELinux policy is loaded.
+
+
 ### Harden SSH Access
   * Create an Authentication Key-pairPermalink (On your own device)
   ```shell
