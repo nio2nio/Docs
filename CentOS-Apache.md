@@ -264,7 +264,7 @@
   # 變更目錄權限
   sudo chmod -R 755 /var/www
 
-  # 建立設定檔目錄
+  # 建立設定檔目錄
   sudo mkdir /etc/httpd/sites-available
   sudo mkdir /etc/httpd/sites-enabled
 
