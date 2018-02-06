@@ -37,3 +37,23 @@
   # N = NFS
   ```
   
+### Webmin
+  * Configuration (**`/etc/yum.repos.d/webmin.repo`**)
+  ```shell
+  [Webmin]
+  name=Webmin Distribution Neutral
+  #baseurl=http://download.webmin.com/download/yum
+  mirrorlist=http://download.webmin.com/download/yum/mirrorlist
+  enabled=1
+  ```
+  * Add the Webmin author's PGP key
+  ```shell
+  wget http://www.webmin.com/jcameron-key.asc
+  sudo rpm --import jcameron-key.asc
+  ```
+  * Installation
+  ```shell
+  sudo yum install -y webmin
+  ```
+  * Navigate to https://your_domain:10000
+  
