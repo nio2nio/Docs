@@ -42,7 +42,7 @@
   
   # 當安裝套件時出現錯誤訊息:pkgKey xxx doesn't exist in repo base
   yum clean metadata
-  ```
+  ```
   
 ### Set the Hostname
 ```shell
