@@ -286,6 +286,28 @@ date
   scp -l 400 /path/file1 myuser@192.168.0.1:/path/file2
   ```
   
+### Zip
+  * Installation
+  ```shell
+  yum install zip unzip
+  ```
+  * Zip
+  ```shell
+  # 壓縮目錄 (將data目錄下的所有檔案壓縮到file.zip，指令無須加上zip副檔名)
+  zip file data/*
+  # 將data目錄下所有檔案及子目錄壓縮到file.zip
+  zip -r file data/*
+  ```
+  * Unzip
+  ```shell
+  # 將file.zip解壓縮到當前目錄
+  unzip file.zip
+  # 解壓縮檔內其中一個檔案
+  unzip file.zip test.php
+  # 解壓縮到指定目錄
+  unzip file.zip -d /home/phpini
+  ```
+  
 ### Use Fail2Ban for SSH Login Protection
 
 ### FirewallD
