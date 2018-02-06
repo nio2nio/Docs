@@ -1,15 +1,13 @@
 ### Install Software Update (Yum)
-  * Proxy Configuration
+  * Proxy Configuration (**`/etc/yum.conf`**)
   ```shell
-  vi /etc/yum.conf
   proxy=http://ip:port
   ```
-  * Epel (Extra Packages for Enterprise Linux 7)
+  * Install Epel (Extra Packages for Enterprise Linux 7)
   ```shell
-  yum install -y epel-release
+  yum install epel-release
   ```
-  
-  * Cheat Sheet
+  * Usage
   ```shell
   yum install package
   # 升級全部套件
@@ -96,20 +94,21 @@ date
 ```
 
 ### Add Limited User Account
-```shell
-useradd new_user && passwd new_user
-usermod -aG wheel new_user
+  * Add new user
+  ```shell
+  useradd new_user && passwd new_user
+  usermod -aG wheel new_user
+  ```
+  * Configuration (**`/etc/pam.d/su`**)
+  ```
+  auth    required    pam_wheel.so use_uid (uncomment this line)
+  ```
+  * Configuration (**`/etc/sudoers`**) Or visudo
+  ```shell
+  %wheel  ALL=(ALL)   ALL (uncomment this line)
+  ```
 
-vi /etc/pam.d/su
-auth    required    pam_wheel.so use_uid (uncomment this line)
-
-# In CentOS 6 a wheel group is disabled by default for sudo access.
-vi /etc/sudoers 
-/usr/sbin/visudo
-%wheel  ALL=(ALL)   ALL (uncomment this line)
-```
-
-### Sudo (/etc/sudoers)
+### Sudo (**`/etc/sudoers`**)
   * Transfer root privilege to a user.
   ```shell
   cent    ALL=(ALL)       ALL
@@ -138,20 +137,22 @@ vi /etc/sudoers
   ```
   
 ### SELINUX
-> **`enforcing`** - SELinux security policy is enforced.<br>
-> **`permissive`** - SELinux prints warnings instead of enforcing.<br>
-> **`disabled`** - No SELinux policy is loaded.
-```shell
-# Show status
-getenforce
-
-# Configure SELinux
-sudo vi /etc/selinux/config
-SELinux=disabled
-
-# Reboot
-reboot
-```
+  * Show selinux status
+  > **`enforcing`** - SELinux security policy is enforced.<br>
+  > **`permissive`** - SELinux prints warnings instead of enforcing.<br>
+  > **`disabled`** - No SELinux policy is loaded.
+  ```shell
+  # Show status
+  getenforce
+  ```
+  * Configuration (**`/etc/selinux/config`**)
+  ```shell
+  SELinux=disabled
+  ```
+  * Reboot
+  ```shell
+  reboot
+  ```
 
 ### Harden SSH Access
   * Create an Authentication Key-pairPermalink (On your own device)
@@ -166,9 +167,8 @@ reboot
   ```shell
   sudo chmod 700 -R ~/.ssh && chmod 600 ~/.ssh/authorized_keys
   ```
-  * SSH Daemon Options
+  * SSH Daemon Options (**`/etc/ssh/sshd_config`**)
   ```shell
-  sudo vi /etc/ssh/sshd_config
   # Custom Port
   Port 513113
   
@@ -195,23 +195,18 @@ reboot
   
 ### Bash History
   * bash 會將使用者執行過的歷史指令都儲存在 **`.bash_history`** 這個檔案中，由於 bash 並不會即時將新的指令寫入 .bash_history，所以這個只能查看使用者過去執行過的指令
-  ```shell
-  cat /home/user/.bash_profile
-  ```
   * **`w`** 指令可以列出 Linux 系統上目前有哪些使用者登入，並且顯示每個使用者正在執行的指令
   
 ### Vim
-  * Set Alias
+  * Set Alias (**`/etc/profile`**)
   ```shell
-  sudo vi /etc/profile
   alias vi='vim'
   
   # Reload
   source /etc/profile
   ```
-  * Configuration
+  * Configuration (**`~/.vimrc`**)
   ```shell
-  vi ~/.vimrc
   set nocompatible
 
   set encoding=utf-8
