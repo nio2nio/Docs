@@ -20,6 +20,20 @@
   sudo chown apache /var/log/php
   ```
   
+### composer
+  * Switch into the temp directory
+  ```shell
+  cd /tmp
+  ```
+  * Install Composer using cURL
+  ```shell
+  sudo curl -sS https://getcomposer.org/installer | php
+  ```
+  * make Composer globally accessible
+  ```shell
+  sudo mv /tmp/composer.phar /usr/local/bin/composer
+  ```
+  
 ### phpMyAdmin
   * Installation
   ```shell
