@@ -41,20 +41,21 @@
 **`git log -10`** 查詢歷史紀錄
 * --pretty=oneline 取得較為精簡的歷史紀錄
 * --abbrev-commit 僅輸出部分的「絕對名稱」<br />
+
 **`git reflog`** 列印出所有「歷史紀錄」的版本變化<br />
-  * 這裡有個特殊的「參考名稱」為 HEAD@{0}，這裡每個版本都會有一個歷史紀錄都會有個編號，代表著這個版本的在記錄檔中的順位。如果是 HEAD@{0} 的話，永遠代表目前分支的「最新版」<br />
+* 這裡有個特殊的「參考名稱」為 HEAD@{0}，這裡每個版本都會有一個歷史紀錄都會有個編號，代表著這個版本的在記錄檔中的順位。如果是 HEAD@{0} 的話，永遠代表目前分支的「最新版」<br />
   
 **`git reflog expire --expire=now --all`** 立即清除所有歷史紀錄<br />
 **`git cat-file -p [commit-id]`** 取得 commit 物件的詳細資訊
 #### 基本操作
 **`git status`** 查詢當前工作目錄的詳細狀態<br />
-  * -s 來顯示較為精簡的版本<br />
+* -s 來顯示較為精簡的版本<br />
   
 **`git add .`** 自動將所有檔案(含子目錄的檔案)加入到工作目錄索引中，有時候我們只想讓特定目錄或特定檔案加入版本，這時你也可以指定特定目錄，或利用萬用字元來加入檔案<br />
 **`git commit -m "版本紀錄"`** 提交變更 / 建立版本 <br />
 **`git commit --amend`** 重新提交一次最後一個版本 (即 HEAD 版本)<br />
 **`git reset`** 重設工作目錄的索引狀態<br />
-  * **`--hard`** 工作目錄還原到目前的最新版<br />
+* **`--hard`** 工作目錄還原到目前的最新版<br />
   
 **`git rm 'Gruntfile.js'`**<br />
   1. 刪除工作目錄快取的 'Gruntfile.js' 這個檔案 (用來標示這個刪除檔案的動作要列入版本控管)
@@ -79,4 +80,4 @@
 **`git remote add origin [remote-git]`** 註冊遠端儲存庫<br />
 **`git push origin --delete [remote-branch-name]`** 刪除遠端分支<br />
 **`git blame [file-name]`** 找出改壞程式的兇手<br />
-  **`git blame -L [start-line],[end-line] [file-name]`**
+**`git blame -L [start-line],[end-line] [file-name]`**
