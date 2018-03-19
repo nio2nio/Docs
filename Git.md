@@ -40,7 +40,7 @@
 > **`git diff HEAD`**
 > 拿「工作目錄」與「當前分支的最新版」進行比對
 #### **`git diff --cached [commit_id]`**
-> 比對「當前的索引狀態」與「指定 commit 物件裡的那個 tree 物件」
+> 比對「當前的索引狀態」與「指定 commit 物件裡的那個 tree 物件」<br />
 > **`git diff --cached HEAD`**
 > 比對「當前的索引狀態」與「當前分支的最新版」進行比對
 #### **`git diff [commit_id1] [commit_id2]`**
