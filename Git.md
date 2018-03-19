@@ -38,9 +38,9 @@
 **`git diff [commit-id1] [commit-id2]`** 透過兩個不同的版本 ( commit id ) 來比對其差異 <br />
 **`git diff HEAD^ HEAD`** 比較【最新版的前一版】與【最新版】之間的差異
 #### 紀錄
-**`git log -10`** 查詢歷史紀錄<br />
-  * --pretty=oneline 取得較為精簡的歷史紀錄<br />
-  * --abbrev-commit 僅輸出部分的「絕對名稱」<br />
+**`git log -10`** 查詢歷史紀錄
+* --pretty=oneline 取得較為精簡的歷史紀錄
+* --abbrev-commit 僅輸出部分的「絕對名稱」<br />
 **`git reflog`** 列印出所有「歷史紀錄」的版本變化<br />
   * 這裡有個特殊的「參考名稱」為 HEAD@{0}，這裡每個版本都會有一個歷史紀錄都會有個編號，代表著這個版本的在記錄檔中的順位。如果是 HEAD@{0} 的話，永遠代表目前分支的「最新版」<br />
   
