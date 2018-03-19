@@ -1,3 +1,9 @@
+### 物件的符號參照名稱 (symref)
+* **`HEAD`**
+  * 永遠會指向「工作目錄」中所設定的「分支」當中的「最新版」。
+  * 所以當你在這個分支執行 git commit 後，這個 HEAD 符號參照也會更新成該分支最新版的那個 commit 物件。
+
+
 #### **`git status`**
 > 查詢當前工作目錄的詳細狀態
 > -s 來顯示較為精簡的版本
@@ -98,3 +104,8 @@
 > 顯示特定遠端儲存庫的參照名稱。包含遠端分支與遠端標籤。
 #### **`git remote add origin [remote_git]`**
 > 註冊遠端儲存庫
+#### **`git push origin --delete [remote_branch_name]`**
+> 刪除遠端分支
+#### **`git blame [file_name]`**
+#### **`git blame -L [start-line],[end-line] [file-name]`**
+> 找出改壞程式的兇手
