@@ -80,4 +80,4 @@
 **`git remote add origin [remote-git]`** 註冊遠端儲存庫<br />
 **`git push origin --delete [remote-branch-name]`** 刪除遠端分支<br />
 **`git blame [file-name]`** 找出改壞程式的兇手<br />
-**`git blame -L [start-line],[end-line] [file-name]`**
+* **`git blame -L [start-line],[end-line] [file-name]`**
