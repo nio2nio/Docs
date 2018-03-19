@@ -17,7 +17,7 @@
 #### **`git checkout [branch_name] [file_name]`**
 > **`git checkout master Grunefile.js`**
 > 把 master 分支中最新版的 Grunefile.js 給還原
-<br />
+
 #### **`git branch [branch_name]`**
 > 建立分支，但目前工作目錄維持在自己的分支
 #### **`git checkout -b [branch_name]`**
@@ -28,7 +28,7 @@
 > 刪除分支
 #### **`git checkout [commit_id]`**
 > 把工作目錄的狀態切換成某個版本了
-<br />
+
 #### **`git diff`**
 > 比對的是「工作目錄」與「索引」之間的差異
 #### **`git diff [commit_id]`**
@@ -43,7 +43,7 @@
 > 透過兩個不同的版本 ( commit id ) 來比對其差異 <br />
 > **`git diff HEAD^ HEAD`**
 > 比較【最新版的前一版】與【最新版】之間的差異
-<br />
+
 #### **`git log -10`**
 > 查詢歷史紀錄<br />
 > --pretty=oneline 取得較為精簡的歷史紀錄<br />
