@@ -53,7 +53,8 @@
 **`git commit -m "版本紀錄"`** 提交變更 / 建立版本 <br />
 **`git commit --amend`** 重新提交一次最後一個版本 (即 HEAD 版本)<br />
 **`git reset`** 重設工作目錄的索引狀態<br />
-  * **`--hard`** 工作目錄還原到目前的最新版
+  * **`--hard`** 工作目錄還原到目前的最新版<br />
+  
 **`git rm 'Gruntfile.js'`**<br />
   1. 刪除工作目錄快取的 'Gruntfile.js' 這個檔案 (用來標示這個刪除檔案的動作要列入版本控管)
   2. 刪除工作目錄下的 'Gruntfile.js' 這個實體檔案 (代表真的把這個實體檔案給刪除)
@@ -69,7 +70,8 @@
 **`git clone`** 將遠端儲存庫複製到本地，並建立工作目錄與本地儲存庫 (就是 .git 資料夾)<br />
 **`git pull`** 將遠端儲存庫的最新版下載回來，下載的內容包含完整的物件儲存庫(object storage)。並且將遠端分支合併到本地分支。 (將 origin/master 遠端分支合併到 master 本地分支)，所以一個 git pull 動作，完全相等於以下兩段指令：<br />
   1. **`git fetch`**
-  2. **`git merge origin/master`**
+  2. **`git merge origin/master`**<br />
+  
 **`git push`** 將本地儲存庫中目前分支的所有相關物件推送到遠端儲存庫中。<br />
 **`git fetch`** 將遠端儲存庫的最新版下載回來，下載的內容包含完整的物件儲存庫(object storage)。 這個命令不包含「合併」分支的動作。<br />
 **`git ls-remote`** 顯示特定遠端儲存庫的參照名稱。包含遠端分支與遠端標籤。<br />
