@@ -43,6 +43,7 @@
   * --abbrev-commit 僅輸出部分的「絕對名稱」<br />
 **`git reflog`** 列印出所有「歷史紀錄」的版本變化<br />
   * 這裡有個特殊的「參考名稱」為 HEAD@{0}，這裡每個版本都會有一個歷史紀錄都會有個編號，代表著這個版本的在記錄檔中的順位。如果是 HEAD@{0} 的話，永遠代表目前分支的「最新版」<br />
+  
 **`git reflog expire --expire=now --all`** 立即清除所有歷史紀錄<br />
 **`git cat-file -p [commit-id]`** 取得 commit 物件的詳細資訊
 #### 基本操作
