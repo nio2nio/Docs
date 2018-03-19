@@ -20,6 +20,7 @@
 > **`git checkout master Grunefile.js`**
 > 把 master 分支中最新版的 Grunefile.js 給還原
 
+
 #### **`git branch [branch_name]`**
 > 建立分支，但目前工作目錄維持在自己的分支
 #### **`git checkout -b [branch_name]`**
@@ -30,6 +31,7 @@
 > 刪除分支
 #### **`git checkout [commit_id]`**
 > 把工作目錄的狀態切換成某個版本了
+
 
 #### **`git diff`**
 > 比對的是「工作目錄」與「索引」之間的差異
