@@ -37,3 +37,34 @@ $ sudo firewall-cmd --reload
 * Master/Global config file – **`/etc/nginx/nginx.conf`**
 * Port 80 http config file – /etc/nginx/conf.d/default.conf
 * Document root directory – **`/usr/share/nginx/html`**
+
+### Installing PHP version 7.2
+```shell
+$ sudo yum install epel-release
+$ sudo yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+$ sudo yum install yum-utils
+$ sudo yum-config-manager --enable remi-php72
+$ sudo yum update
+$ sudo yum install php72 php72-php-fpm php72-php-gd php72-php-json php72-php-mbstring php72-php-mysqlnd php72-php-xml php72-php-xmlrpc php72-php-opcache
+```
+
+### Verification
+```shell
+$ php72 --version
+$ php72 --modules
+```
+
+### Turn on PHP fpm for nginx
+```shell
+$ sudo systemctl start php72-php-fpm.service
+$ sudo systemctl stop php72-php-fpm.service
+$ sudo systemctl restart php72-php-fpm.service
+$ sudo systemctl enable php72-php-fpm.service
+$ sudo systemctl disable php72-php-fpm.service
+$ sudo systemctl status php72-php-fpm.service
+```
+
+### Configure Nginx for using with PHP 7.2
+```shell
+$ egrep '^(user|group)' /etc/nginx/nginx.conf
+```
