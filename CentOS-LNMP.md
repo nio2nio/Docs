@@ -92,5 +92,6 @@ $ sudo systemctl restart nginx
 
 ### Bug: FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined function __() in /usr/share/phpMyAdmin/libraries/core.lib.php on line 245"
 ```shell
+sudo chown root:nginx -Rvf /var/opt/remi/php72/lib/php
 ```
 
