@@ -90,6 +90,47 @@ location ~ \.php$ {
 $ sudo systemctl restart nginx
 ```
 
+### Install phpMyAdmin
+```shell
+$ sudo yum install -y phpmyadmin
+```
+
+### phpMyAdmin Nginx Configuration
+```shell
+$sudo vi /etc/nginx/conf.d/phpMyAdmin.conf
+server {
+	listen				                9481;
+	server_name	                  localhost;
+	root 	                        /usr/share/phpMyAdmin;
+	charset			                  utf-8;
+	
+	access_log		                /var/logs/nginx/phpMyAdmin_access.log;
+	error_log		                  /var/logs/nginx/phpMyAdmin_error.log;
+	
+	location / {
+		index	                      index.html index.htm index.php;
+	}
+	
+	error_page   500 502 503 504  /50x.html;
+	location = /50x.html {
+		root                        /usr/share/phpMyAdmin;
+	}
+	
+	location ~ \.php$ {
+		fastcgi_pass                127.0.0.1:9000;
+		fastcgi_index               index.php;
+		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+		include                     fastcgi_params;
+	}
+	
+	# deny access to apache .htaccess files
+	location ~ /\.ht
+    {
+        deny all;
+    }
+}
+```
+
 ### Bug: FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined function __() in /usr/share/phpMyAdmin/libraries/core.lib.php on line 245"
 ```shell
 sudo chown root:nginx -Rvf /var/opt/remi/php72/lib/php
