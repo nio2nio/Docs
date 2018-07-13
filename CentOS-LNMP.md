@@ -33,7 +33,7 @@ $ sudo firewall-cmd --reload
 ```
 
 ### Configure Nginx server
-* Config dir – /etc/nginx/
-* Master/Global config file – /etc/nginx/nginx.conf
+* Config dir – **`/etc/nginx/`**
+* Master/Global config file – **`/etc/nginx/nginx.conf`**
 * Port 80 http config file – /etc/nginx/conf.d/default.conf
-* Document root directory – /usr/share/nginx/html
+* Document root directory – **`/usr/share/nginx/html`**
