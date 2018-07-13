@@ -67,4 +67,30 @@ $ sudo systemctl status php72-php-fpm.service
 ### Configure Nginx for using with PHP 7.2
 ```shell
 $ egrep '^(user|group)' /etc/nginx/nginx.conf
+# output: 
+#  user nginx;
+  
+$ sudo vi /etc/opt/remi/php72/php-fpm.d/www.conf
+# Set user and group to nginx:
+user = nginx
+group = nginx
+
+$ sudo systemctl restart php72-php-fpm.service
+
+# Update nginx.conf
+$ sudo vi /etc/nginx/conf.d/default.conf
+location ~ \.php$ {
+    root /usr/share/nginx/html;
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_index  index.php;
+    include        fastcgi_params;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+}
+
+$ sudo systemctl restart nginx
 ```
+
+### Bug: FastCGI sent in stderr: "PHP message: PHP Fatal error:  Call to undefined function __() in /usr/share/phpMyAdmin/libraries/core.lib.php on line 245"
+```shell
+```
+
