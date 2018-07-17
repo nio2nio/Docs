@@ -14,7 +14,7 @@ $ odbcinst -d -q
   [MySQL]
   [SyBase]
 ```
-* PHP PDO
+#### PHP PDO
 ```php
 $host = '10.1.2.3';
 $port = '5000';
