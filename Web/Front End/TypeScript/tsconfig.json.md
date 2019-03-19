@@ -2,71 +2,76 @@
 
 ### 1.1 compilerOptions
 
-1.1.1 **module: enum** 
+1.1.1 **alwaysStrict: boolean**
 
-``module``用於指定模塊的代碼生成規則，可以使用``commonjs``，``amd``，``umd``，``system``，``es6``，``es2015``，``none``這些選項。
+Parse in strict mode and emit ``use strict`` for each source file.
 
-選擇commonJS，會生成符合commonjs規範的文件，使用amd，會生成滿足amd規範的文件，使用system会生成使用ES6的system.import的代码。使用es6或者是es2015會產生包含ES6特性的代碼。
+1.1.2 **baseUrl: string**
 
-1.1.2 **target: enum**
+Base directory to resolve non-relative module names.
 
-``target``要complier成的js版本，可以使用``es3``, ``es5``, ``es2015``, ``es6``
+1.1.3 **charset: string**
 
-1.1.3 **sourceMap: boolean**
+The character set (Default: ``UTF8``) of the input files.
 
-``sourceMap``是當我們使用chrome dev tools時，當有錯誤是否我們能夠直接在js連回ts檔案格式去偵錯，通常只會在dev環境開啟（為方便偵錯），不然會讓產出的檔案變大
+1.1.4 **declaration: boolean**
 
-1.1.4 **noImplicitAny: boolean**
+Generates corresponding .d.ts file.
 
-是否在型別設定為any時發出警告
+1.1.5 **module: enum**
 
-1.1.5 **removeComments: boolean**
+Specify module code generation: ``None``, ``CommonJS``, ``AMD``, ``System``, ``UMD``, ``ES6``, ``ES2015`` or ``ESNext``.
 
-設置為true代表不輸出注解
+1.1.6 **moduleResolution: enum**
 
-1.1.6 **charset: string**
+Determine how modules get resolved. Either ``Node`` for Node.js/io.js style resolution, or ``Classic``.
 
-1.1.7 **declaration: boolean**
+1.1.7 **newLine: enum**
 
-是否需要產生定義文件d.ts
+Use the specified end of line sequence to be used when emitting files: ``crlf`` (windows) or ``lf`` (unix).”.
 
-1.1.8 **newLine: enum**
+1.1.8 **noImplicitAny: boolean**
 
-可以使用``CRLF``(預設)及``LF``
+Raise error on expressions and declarations with an implied any type.
 
-1.1.9 **noResolve: boolean**
+1.1.9 **noImplicitUseStrict: boolean**
 
-設定為true時，不使用``///``引入模塊，需要以編譯的文件在列表中引入。
+Do not emit ``use strict`` directives in module output.
 
-```javascript
-/// <reference path="" />
-import PI from './2A.ts';
-```
+1.1.10 **outDir: string**
 
-1.1.10 **outFile: string(url)**
+Redirect output structure to the directory.
 
-設定輸出文件，會合併多個ts文件
+1.1.11 **outFile: string**
 
-1.1.11 **outDir: string(url)**
-
-輸出文件的根目錄
+Concatenate and emit output to single file.
 
 1.1.12 **pretty: boolean**
 
-Prettier 錯誤訊息
+Stylize errors and messages using color and context.
 
-1.1.13 **noImplicitUseStrict: boolean**
+1.1.13 **removeComments: boolean**
 
-使不使用``use strict``
+Remove all comments except copy-right header comments beginning with ``/*!``.
 
-1.1.14 **rootDir: string(url)**
+1.1.14 **rootDir: string**
 
-輸入文件的根目錄
+Specifies the root directory of input files.
 
-1.1.15 **watch: boolean**
+1.1.15 **sourceMap: boolean**
 
-監視文件，若文件有異動，自動編譯
+Generates corresponding .map file.
 
-1.1.16 **emitDecoratorMetadata: boolean**
+1.1.16 **target: enum**
+
+Specify ECMAScript target version: ``ES3`` (default), ``ES5``, ``ES6/ES2015``, ``ES2016``, ``ES2017`` or ``ESNext`` (latest supported ES proposed features). 
+
+1.1.17 **watch: boolean**
+
+Run the compiler in watch mode. Watch input files and trigger recompilation on changes.
+
+
+
+
 
 
