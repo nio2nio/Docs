@@ -10,9 +10,9 @@
 
 ## 自訂 Image
 1. 製作Dockerfile
-  + 選擇kernel或是os，通常稱base image
-  + kernel指令安裝redis或是其他軟體
-  + 指定啟動container執行命令
+  * 選擇kernel或是os，通常稱base image
+  * kernel指令安裝redis或是其他軟體
+  * 指定啟動container執行命令
 ```
 # 選擇kernel/OS
 # alpine是最小的linux kernel
@@ -32,4 +32,9 @@ CMD ["redis-server"]
 2. Build Dockerfile
 ```
 docker build .
+
+# 得到Image id
+Successfully built 8f0d063462af
+
+docker run image_id
 ```
