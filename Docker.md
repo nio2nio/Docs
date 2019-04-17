@@ -18,6 +18,10 @@
 # alpine是最小的linux kernel
 FROM alpine
 
+# Behind Proxy
+ENV http_proxy "http://10.1.1.117:8088"
+ENV https_proxy "http://10.1.1.117:8088"
+
 # 安裝redis
 RUN apk add --update redis
 
