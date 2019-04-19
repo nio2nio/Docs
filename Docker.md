@@ -1,6 +1,7 @@
 ## 常用Command
 + **docker `ps -a`** - 列出所有Container
-+ **docker `system prune`** - 刪除硬碟裡面所有Containers及Image cache
++ **docker `system prune`** - Remove all stopped containers, all dangling images, and all unused networks.
+  + use the -f or --force flag to bypass the prompt
 + **docker `create image command`** - 建立Container
 + **docker `start` image_id** - 啟動/重新啟動Container
 + **docker `logs` image_id** - 顯示Container output
