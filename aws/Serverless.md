@@ -5,3 +5,6 @@
 
 ## Create an execution role
 - Select type of trusted entity: **Lambda**
+- Filter policies: **AWS Lambda**
+  - [x] **AWSLambdaBasicExecutionRole**
+- Role name: **hexal-lambda-basic-execution**
