@@ -17,6 +17,7 @@
     - [x] putItem
     - [x] updateItem
     - [x] deleteItem
+    - [x] Scan
   - Resources: **Add DynamoDB ARN**
 - Create policy name: **hexal-dynamo-policy**
 
@@ -26,7 +27,7 @@
 - Permissions: 
   - Execution role: **Use an existing role**
   - Existing role: **hexal-lambda-basic-execution**
-##### Code
+- Code
 ```javascript
 'use strict';
 const AWS = require('aws-sdk');
@@ -65,5 +66,42 @@ exports.handler = async (event, context) => {
   return response;
 };
 ```
-##### Create test method
+- Create test method & test
+  - 
+- Check DynamoDB if data is created
+##### Create delete function
+- Code
+```javascript
+  const params = {
+    TableName: 'Products',
+    Key: {
+      id: 'A0001'
+    }
+  };
+
+  try {
+    const data = await documentClient.delete(params).promise();
+    responseBody = JSON.stringify(data);
+    statusCode = 204;
+  } catch (err) {
+    responseBody = `Unable to delete product: ${err}`;
+    statusCode = 403;
+  }
+```
+##### Create get function
+```javascript
+  const params = {
+    TableName: 'Products'
+  };
+
+  try {
+    const data = await documentClient.scan(params).promise();
+    responseBody = JSON.stringify(data.Items);
+    statusCode = 200;
+  } catch (err) {
+    responseBody = `Unable to get products: ${err}`;
+    statusCode = 403;
+  }
+```
+
 
