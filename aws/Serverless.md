@@ -26,4 +26,44 @@
 - Permissions: 
   - Execution role: **Use an existing role**
   - Existing role: **hexal-lambda-basic-execution**
+##### Code
+```javascript
+'use strict';
+const AWS = require('aws-sdk');
+
+exports.handler = async (event, context) => {
+  const documentClient = new AWS.DynamoDB.DocumentClient();
+
+  let responseBody = "";
+  let statusCode = 0;
+
+  const params = {
+    TableName: 'Products',
+    Item: {
+      id: 'A0001',
+      productName: 'Solar Panel'
+    }
+  };
+
+  try {
+    const data = await documentClient.put(params).promise();
+    responseBody = JSON.stringify(data);
+    statusCode = 201;
+  } catch (err) {
+    responseBody = `Unable to put  product: ${err}`;
+    statusCode = 403;
+  }
+
+  const response = {
+    statusCode,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: responseBody
+  };
+
+  return response;
+};
+```
+##### Create test method
 
