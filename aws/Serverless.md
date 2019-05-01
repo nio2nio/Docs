@@ -18,3 +18,12 @@
     - [x] updateItem
     - [x] deleteItem
   - Resources: **Add DynamoDB ARN**
+- Create policy name: **hexal-dynamo-policy**
+
+## Create Lambda Function
+##### Create put function
+- Function name: **hexlPut**
+- Permissions: 
+  - Execution role: **Use an existing role**
+  - Existing role: **hexal-lambda-basic-execution**
+
