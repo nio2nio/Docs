@@ -22,6 +22,7 @@
 - Create policy name: **hexal-dynamo-policy**
 
 ## Create Lambda Function
+
 ##### Create put function
 - Function name: **hexlPut**
 - Permissions: 
@@ -69,6 +70,7 @@ exports.handler = async (event, context) => {
 - Create test method & test
   - 
 - Check DynamoDB if data is created
+
 ##### Create delete function
 - Code
 ```javascript
@@ -88,6 +90,7 @@ exports.handler = async (event, context) => {
     statusCode = 403;
   }
 ```
+
 ##### Create get function
 ```javascript
   const params = {
