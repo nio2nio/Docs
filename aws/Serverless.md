@@ -68,7 +68,6 @@ exports.handler = async (event, context) => {
 };
 ```
 - Create test method & test
-  - 
 - Check DynamoDB if data is created
 
 ##### Create delete function
