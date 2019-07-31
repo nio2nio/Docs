@@ -25,6 +25,9 @@ upload_max_filesize = 100M
 post_max_size = 100M
 max_execution_time = 360
 date.timezone = Asia/Taipei
+# Display Error Message
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
+display_errors = on
 
 # Restart php7.2-fpm Service
 $ sudo systemctl restart php7.2-fpm.service
