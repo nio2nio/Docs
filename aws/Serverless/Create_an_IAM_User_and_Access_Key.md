@@ -3,5 +3,5 @@
 - Add a user
   - Enable **Programmatic access**
   - **Attach existing policies directly**
-    - [x] AdministratorAccess
+    - [x] **AdministratorAccess**
 - View and copy the API Key & Secret to a temporary place.
