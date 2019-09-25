@@ -1,3 +1,4 @@
+```yml
 service:
   name: myService
 
@@ -307,3 +308,4 @@ resources:
         'Fn::GetAtt': [usersTable, Arn]
       Export:
         Name: ${self:service}:${opt:stage}:UsersTableArn # see Fn::ImportValue to use in other services and http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html for documentation on use.
+```
